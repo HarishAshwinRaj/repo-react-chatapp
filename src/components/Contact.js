@@ -20,6 +20,7 @@ const Contact = () => {
       >
         <img
           src={`https://picsum.photos/id/1005/50/50`}
+          alt={"img"}
           style={{
             borderRadius: "200px"
           }}
