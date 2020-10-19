@@ -10,7 +10,7 @@ const Home = () => {
     <div style={{ display: "flex", flexDirection: "row" }}>
       <Router>
         {width > 700 ? (
-          <Route path="/">
+          <Route path={["/:type/:chatid", "/"]}>
             <>
               <div style={{ width: width / 3 }}>
                 <ListContact />
@@ -23,7 +23,7 @@ const Home = () => {
             <Route exact path="/">
               <ListContact />
             </Route>
-            <Route path="/:chatid">
+            <Route path="/:type/:chatid">
               <ChatComponent />
             </Route>
           </div>
