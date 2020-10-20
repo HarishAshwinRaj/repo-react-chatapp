@@ -2,18 +2,19 @@ import React from "react";
 import useWindowDim from "../../custHoos/usewindow";
 import MaterialIcon, { colorPalette } from "material-icons-react";
 
-const ChatHeader = () => {
+const ChatHeader = ({ width }) => {
   return (
     <div
       style={{
-        position: "fixed",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "red",
         paddingLeft: 20,
         paddingTop: 7,
-        width: "100%"
+        marginLeft: 5,
+        zIndex: 10,
+        width: width - 23
       }}
     >
       <span>
@@ -43,7 +44,8 @@ const ChatHeader = () => {
       <div
         style={{
           alignSelf: "center",
-          flex: "10%"
+          flex: "10%",
+          marginRight: 30
         }}
       >
         <MaterialIcon icon={"more_vert"} color="blue" />

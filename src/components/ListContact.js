@@ -4,6 +4,8 @@ const ListContact = ({ width }) => {
   return (
     <div
       style={{
+        margin: 10,
+        marginLeft: 0,
         display: "flex",
         flexDirection: "column",
         position: "fixed",
@@ -12,8 +14,15 @@ const ListContact = ({ width }) => {
         overflowY: "scroll"
       }}
     >
-      list of contacts [<Contact />, <Contact />,<Contact />,<Contact />,
-      <Contact />,<Contact />,<Contact />,<Contact />,<Contact />, ]
+      <>
+        <Contact />
+        <Contact />
+        <Contact />
+        <Contact />
+        <Contact />
+        <Contact />
+        <Contact />
+      </>
     </div>
   );
 };
