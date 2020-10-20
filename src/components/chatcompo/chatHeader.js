@@ -1,4 +1,5 @@
 import React from "react";
+import MaterialIcon, { colorPalette } from "material-icons-react";
 
 const ChatHeader = () => {
   return (
@@ -6,11 +7,21 @@ const ChatHeader = () => {
       style={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "red",
+        paddingLeft: 20,
+        paddingTop: 7
       }}
     >
-      <div>bac </div>
-      <div>
+      <span>
+        <MaterialIcon icon={"arrow_back"} color="blue" />
+      </span>
+      <div
+        style={{
+          paddingLeft: 10,
+          paddingRight: 20
+        }}
+      >
         <img
           src={"https://picsum.photos/id/1005/50/50"}
           alt={"img"}
@@ -19,7 +30,21 @@ const ChatHeader = () => {
           }}
         />
       </div>
-      <div>chats name</div>
+      <div
+        style={{
+          flex: "100%"
+        }}
+      >
+        chats name
+      </div>
+      <div
+        style={{
+          alignSelf: "center",
+          flex: "10%"
+        }}
+      >
+        <MaterialIcon icon={"more_vert"} color="blue" />
+      </div>
     </div>
   );
 };

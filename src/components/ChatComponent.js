@@ -5,14 +5,9 @@ import ChatHeader from "./chatcompo/chatHeader";
 const ChatComponent = () => {
   const { chatid, type } = useParams();
   return (
-    <div
-      style={{
-        padding: 10
-      }}
-    >
-      chat type is {type} id is{chatid}
-      <ChatHeader />
-      <ChatContent type={type} />
+    <div style={{}}>
+      <ChatHeader type={type} />
+      <ChatContent type={type} chatid={chatid} />
     </div>
   );
 };

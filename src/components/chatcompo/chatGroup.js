@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-
+const f = Date.now();
 const ChatGroup = () => {
   return (
     <div
@@ -43,7 +43,7 @@ const ChatGroup = () => {
             style={{
               borderRadius: 3,
               padding: 3,
-              marginBottom: 7,
+              marginTop: 3,
               fontSize: 10,
               backgroundColor: "white",
               color: "blue",
