@@ -15,7 +15,9 @@ const Home = () => {
               <div style={{ width: width / 3 }}>
                 <ListContact />
               </div>
-              <ChatComponent />
+              <div style={{ width: (2 * width) / 3 }}>
+                <ChatComponent />
+              </div>
             </>
           </Route>
         ) : (
