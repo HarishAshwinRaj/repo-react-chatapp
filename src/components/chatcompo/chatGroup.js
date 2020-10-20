@@ -15,7 +15,6 @@ const ChatGroup = () => {
       <div
         style={{
           backgroundColor: "blue",
-
           padding: 0,
           borderRadius: 7,
           maxWidth: "75%"
