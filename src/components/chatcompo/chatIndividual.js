@@ -8,7 +8,8 @@ const ChatIndividual = () => {
         color: "white",
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-end"
+        alignItems: "flex-end",
+        marginBottom: 10
       }}
     >
       <div
