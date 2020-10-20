@@ -16,7 +16,7 @@ const ChatInput = () => {
         type="text"
         placeholder="texette"
         style={{
-          backgroundColor: "blue"
+          backgroundColor:'white'
         }}
       />
     </div>

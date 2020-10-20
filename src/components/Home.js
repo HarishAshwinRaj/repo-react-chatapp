@@ -13,7 +13,7 @@ const Home = () => {
           <Route path={["/:type/:chatid", "/"]}>
             <>
               <div style={{ width: width / 3 }}>
-                <ListContact />
+                <ListContact width={width / 3} />
               </div>
               <div style={{ width: (2 * width) / 3 }}>
                 <ChatComponent />
@@ -23,7 +23,7 @@ const Home = () => {
         ) : (
           <div style={{ width: width }}>
             <Route exact path="/">
-              <ListContact />
+              <ListContact width={width} />
             </Route>
             <Route path="/:type/:chatid">
               <ChatComponent />

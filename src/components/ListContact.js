@@ -1,15 +1,19 @@
 import React from "react";
 import Contact from "./Contact";
-const ListContact = () => {
+const ListContact = ({ width }) => {
   return (
     <div
       style={{
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        position: "fixed",
+        width: width,
+        height: "98vh",
+        overflowY: "scroll"
       }}
     >
-      list of contacts
-      <Contact />
+      list of contacts [<Contact />, <Contact />,<Contact />,<Contact />,
+      <Contact />,<Contact />,<Contact />,<Contact />,<Contact />, ]
     </div>
   );
 };
