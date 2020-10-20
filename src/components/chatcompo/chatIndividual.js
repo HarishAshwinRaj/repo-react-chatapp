@@ -14,17 +14,35 @@ const ChatIndividual = () => {
       <div
         style={{
           backgroundColor: "blue",
-          padding: 10,
+          padding: 0,
           borderRadius: 7,
           maxWidth: "75%"
         }}
       >
-        chat as a individual goes here chat as a individual goes here chat as a
-        individual goes here chat as a individual goes here chat as a individual
-        goes here chat as a individual goes here chat as a individual goes here
-        chat as a individual goes here
+        <div
+          style={{
+            margin: 10,
+            display: "flex",
+            flexDirection: "column",
+            fontSize: 15
+          }}
+        >
+          chat as a individual goes here chat as a individual goes here chat as
+          a
+          <div
+            style={{
+              borderRadius: 3,
+              padding: 3,
+              fontSize: 10,
+              backgroundColor: "white",
+              color: "blue",
+              alignSelf: "flex-end"
+            }}
+          >
+            {moment(f).format("LT")}
+          </div>
+        </div>
       </div>
-      <div>{moment(f).format("LT")}</div>
     </div>
   );
 };
