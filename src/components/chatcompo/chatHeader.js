@@ -12,9 +12,9 @@ const ChatHeader = ({ width }) => {
         backgroundColor: "red",
         paddingLeft: 20,
         paddingTop: 7,
-        marginLeft: 5,
+        marginLeft: 2,
         zIndex: 10,
-        width: width - 23
+        width: width - 22
       }}
     >
       <span>

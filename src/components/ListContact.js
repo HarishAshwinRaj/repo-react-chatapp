@@ -5,7 +5,7 @@ const ListContact = ({ width }) => {
     <div
       style={{
         margin: 10,
-        marginLeft: 0,
+        paddingRight: 8,
         display: "flex",
         flexDirection: "column",
         position: "fixed",
