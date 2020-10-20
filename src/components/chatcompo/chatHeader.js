@@ -1,16 +1,19 @@
 import React from "react";
+import useWindowDim from "../../custHoos/usewindow";
 import MaterialIcon, { colorPalette } from "material-icons-react";
 
 const ChatHeader = () => {
   return (
     <div
       style={{
+        position: "fixed",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "red",
         paddingLeft: 20,
-        paddingTop: 7
+        paddingTop: 7,
+        width: "100%"
       }}
     >
       <span>

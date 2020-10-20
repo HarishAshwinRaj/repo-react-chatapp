@@ -4,7 +4,7 @@ import ChatComponent from "./ChatComponent";
 import useWindowDim from "../custHoos/usewindow";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 const Home = () => {
-  const { width, height } = useWindowDim();
+  const { width } = useWindowDim();
   console.log(width, "width");
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>

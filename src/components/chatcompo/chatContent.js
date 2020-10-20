@@ -10,7 +10,22 @@ const ChatContent = ({ type }) => {
       }}
     >
       chats list appear here
-      {type === "i" ? <ChatIndividual /> : <ChatGroup />}
+      {type === "i" ? (
+        [
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />,
+          <ChatIndividual />
+        ]
+      ) : (
+        <ChatGroup />
+      )}
     </div>
   );
 };
