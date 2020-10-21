@@ -10,6 +10,7 @@
   "dependencies": {
     "@firebase/app": "0.6.11",
     "@firebase/auth": "0.15.0",
+    "@firebase/firestore": "1.18.0",
     "material-icons-react": "1.0.4",
     "moment": "2.29.1",
     "react": "16.13.1",
@@ -18,7 +19,8 @@
     "react-redux-firebase": "3.7.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.3",
-    "redux": "4.0.5"
+    "redux": "4.0.5",
+    "redux-firestore": "0.14.0"
   },
   "devDependencies": {
     "typescript": "3.8.3"
