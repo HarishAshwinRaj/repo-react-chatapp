@@ -1,8 +1,12 @@
 import React from "react";
 import SignUp from "./SignUp";
+import Header from '../Header';
+
 const AuthComponent = ({ width }) => {
   return (
     <div style={{ height: "100%", width: width }}>
+
+      <Header/>
       <div
         style={{
           height: "60vh",
