@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { useFirebase } from "react-redux-firebase";
+import { useSelector } from "react-redux";
 const SingleInput = ({ name, ...props }) => {
   return (
     <div>
@@ -33,6 +34,22 @@ const SingleInput = ({ name, ...props }) => {
 const SignIn = () => {
   const [email, setemail] = useState();
   const [pwd, setpwd] = useState();
+  const firebase = useFirebase();
+  const autherr = useSelector((d) => d.firebase.authError);
+  const handlesubmit = (e) => {
+    //e.preventDefault();
+    firebase
+      .login({
+        email: email,
+        password: pwd
+      })
+      .then((d) => {
+        console.log(d, "data");
+      })
+      .catch((e) => {
+        console.log(e, "err");
+      });
+  };
   return (
     <form
       style={{
@@ -41,7 +58,9 @@ const SignIn = () => {
         padding: 5,
         paddingLeft: 20
       }}
+      onSubmit={handlesubmit}
     >
+      <div style={{ padding: 10 }}> {autherr && autherr.message}</div>
       <SingleInput
         name="email"
         onChange={(t) => {
@@ -60,6 +79,7 @@ const SignIn = () => {
           type="button"
           value="login"
           style={{ width: "100%", height: 30 }}
+          onClick={handlesubmit}
         />
       </div>
     </form>

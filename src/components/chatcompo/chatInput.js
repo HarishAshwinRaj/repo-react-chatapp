@@ -31,9 +31,11 @@ const ChatInput = ({ width }) => {
           placeholder="texette"
           style={{
             height: "90%",
-
             width: "80%",
             backgroundColor: "white"
+          }}
+          onChange={(e) => {
+            console.log(e.target.value);
           }}
         />
         <div

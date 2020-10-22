@@ -43,12 +43,13 @@ const SignUp = () => {
     firebase
       .createUser(
         {
-          email: "test78@test.com",
-          password: "testest1"
+          email: email,
+          password: pwd
         },
         {
-          email: "test006@test.com",
-          username: "testest1"
+          email: email,
+          username: name,
+          photourl: null
         }
       )
       .then((d) => {
@@ -69,7 +70,7 @@ const SignUp = () => {
       }}
       onSubmit={handlesubmit}
     >
-      <div style={{ padding: 10 }}> {autherr}</div>
+      <div style={{ padding: 10 }}> {autherr && autherr.message}</div>
       <SingleInput
         name="email"
         onChange={(t) => {

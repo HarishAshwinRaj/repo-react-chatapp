@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Home from "./components/Home";
+import TestFetch from "./testComponent/testFetch";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import firebase from "@firebase/app";
@@ -21,7 +22,11 @@ const firebaseConfig = {
   appId: "1:440662508713:web:77e386bee5c5a3a308d5b8",
   measurementId: "G-RXRSRMPZC1"
 };
-const rrfConfig = { userProfile: "users", useFirestoreForProfile: true };
+const rrfConfig = {
+  userProfile: "users",
+  presence: "presence"
+  // useFirestoreForProfile: true
+};
 
 firebase.initializeApp(firebaseConfig);
 firebase.firestore();
@@ -49,3 +54,4 @@ export default function App() {
     </Provider>
   );
 }
+//
