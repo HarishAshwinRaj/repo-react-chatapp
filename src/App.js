@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Home from "./components/Home";
-import { createStore, combineReducers, compose } from "redux";
+import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import firebase from "@firebase/app";
 import "@firebase/auth";

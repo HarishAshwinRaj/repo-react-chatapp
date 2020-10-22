@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = () => {
+const Contact = ({ img, name }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Contact = () => {
         paddingRight: "5px",
         paddingLeft: "5px",
         borderRadius: "15px",
-        height: "70px",
+        height: "50px",
         marginBottom: 5
       }}
     >
@@ -23,14 +23,14 @@ const Contact = () => {
         }}
       >
         <img
-          src={`https://picsum.photos/id/1005/50/50`}
+          src={img}
           alt={"img"}
           style={{
             borderRadius: "100px"
           }}
         />
       </div>
-      <div style={{}}>contact</div>
+      <div style={{}}>{name}</div>
     </div>
   );
 };

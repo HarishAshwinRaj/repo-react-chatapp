@@ -1,5 +1,5 @@
 import React from "react";
-import ListContact from "./ListContact";
+import ShowContact from "./ShowContact";
 import ChatComponent from "./ChatComponent";
 import useWindowDim from "../custHoos/usewindow";
 import AuthComponent from "./AuthScreen/AuthComponent";
@@ -11,12 +11,12 @@ const Home = () => {
   const auth = useSelector((d) => d.firebase.auth);
   const profile = useSelector((d) => d.firebase.profile);
   const { width, height } = useWindowDim();
-  const firebase = useFirebase();
-  firebase.logout();
+  //const firebase = useFirebase();
+  // firebase.logout();
   if (!!isLoaded(auth)) {
     if (!isEmpty(auth)) {
       return (
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{}}>
           <Router>
             <Switch>
               <Route exact path="/auth">
@@ -24,9 +24,9 @@ const Home = () => {
               </Route>
               {width > 700 ? (
                 <Route path={["/:type/:chatid", "/"]}>
-                  <div>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
                     <div style={{ width: width / 3 }}>
-                      <ListContact width={width / 3} />
+                      <ShowContact width={width / 3} height={height} />
                     </div>
                     <div style={{ width: (2 * width) / 3 }}>
                       <ChatComponent width={(2 * width) / 3} height={height} />
@@ -36,7 +36,7 @@ const Home = () => {
               ) : (
                 <div style={{ width: width }}>
                   <Route exact path="/">
-                    <ListContact width={width} />
+                    <ShowContact width={width} height={height} />
                   </Route>
                   <Route path="/:type/:chatid">
                     <ChatComponent width={width} height={height} />
