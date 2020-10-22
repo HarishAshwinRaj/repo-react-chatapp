@@ -51,7 +51,7 @@ const SignIn = () => {
       });
   };
   return (
-    <form
+    <div
       style={{
         backgroundColor: "red",
         width: "100%",
@@ -82,7 +82,7 @@ const SignIn = () => {
           onClick={handlesubmit}
         />
       </div>
-    </form>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import MaterialIcon from "material-icons-react";
-const SearchBar = ({ text }) => {
+const SearchBar = ({ text, setquery }) => {
   return (
     <div
       style={{
@@ -12,6 +12,9 @@ const SearchBar = ({ text }) => {
       <input
         placeholder={text}
         style={{ width: "90%", paddingLeft: 20, height: 30 }}
+        onChange={(e) => {
+          setquery(e.target.value);
+        }}
       />
       <div
         style={{

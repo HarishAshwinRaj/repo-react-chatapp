@@ -24,8 +24,8 @@ const firebaseConfig = {
 };
 const rrfConfig = {
   userProfile: "users",
-  presence: "presence"
-  // useFirestoreForProfile: true
+  presence: "presence",
+  useFirestoreForProfile: true
 };
 
 firebase.initializeApp(firebaseConfig);

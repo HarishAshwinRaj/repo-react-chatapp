@@ -1,6 +1,6 @@
 import React from "react";
 import MaterialIcon from "material-icons-react";
-const AddContact = () => {
+const AddContact = ({ set }) => {
   return (
     <div
       style={{
@@ -9,6 +9,9 @@ const AddContact = () => {
         height: 30,
         backgroundColor: "yellow",
         textAlign: "center"
+      }}
+      onClick={() => {
+        set((d) => !d);
       }}
     >
       <MaterialIcon icon="add" color="black" />

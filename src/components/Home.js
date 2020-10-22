@@ -15,6 +15,7 @@ const Home = () => {
   // firebase.logout();
   if (!!isLoaded(auth)) {
     if (!isEmpty(auth)) {
+      console.log(profile);
       return (
         <div style={{}}>
           <Router>
@@ -26,20 +27,38 @@ const Home = () => {
                 <Route path={["/:type/:chatid", "/"]}>
                   <div style={{ display: "flex", flexDirection: "row" }}>
                     <div style={{ width: width / 3 }}>
-                      <ShowContact width={width / 3} height={height} />
+                      <ShowContact
+                        width={width / 3}
+                        height={height}
+                        uid={auth.uid}
+                        username={profile.username}
+                      />
                     </div>
                     <div style={{ width: (2 * width) / 3 }}>
-                      <ChatComponent width={(2 * width) / 3} height={height} />
+                      <ChatComponent
+                        width={(2 * width) / 3}
+                        height={height}
+                        uid={auth.uid}
+                      />
                     </div>
                   </div>
                 </Route>
               ) : (
                 <div style={{ width: width }}>
                   <Route exact path="/">
-                    <ShowContact width={width} height={height} />
+                    <ShowContact
+                      width={width}
+                      height={height}
+                      uid={auth.uid}
+                      username={profile.username}
+                    />
                   </Route>
                   <Route path="/:type/:chatid">
-                    <ChatComponent width={width} height={height} />
+                    <ChatComponent
+                      width={width}
+                      height={height}
+                      uid={auth.uid}
+                    />
                   </Route>
                 </div>
               )}

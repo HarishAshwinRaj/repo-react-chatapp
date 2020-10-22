@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFirebase } from "react-redux-firebase";
+import { useFirebase, useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 const SingleInput = ({ name, ...props }) => {
   return (
@@ -37,7 +37,11 @@ const SignUp = () => {
   const [name, setname] = useState();
   const [img, setimg] = useState(null);
   const firebase = useFirebase();
-  const autherr = useSelector((d) => d.firebase.authError);
+  const firestore = useFirestore();
+  const [autherr, auth] = useSelector((d) => [
+    d.firebase.authError,
+    d.firebase.auth
+  ]);
   const handlesubmit = (e) => {
     //e.preventDefault();
     firebase
@@ -53,7 +57,7 @@ const SignUp = () => {
         }
       )
       .then((d) => {
-        console.log(d, "data");
+        console.log(auth && auth.uid, "data");
       })
       .catch((e) => {
         console.log(e, "err");
