@@ -1,5 +1,9 @@
 import React from "react";
 import MaterialIcon from "material-icons-react";
+
+let timer = setTimeout(() => {
+  return null;
+}, 1000);
 const SearchBar = ({ text, setquery }) => {
   return (
     <div
@@ -13,7 +17,13 @@ const SearchBar = ({ text, setquery }) => {
         placeholder={text}
         style={{ width: "90%", paddingLeft: 20, height: 30 }}
         onChange={(e) => {
-          setquery(e.target.value);
+          clearTimeout(timer);
+          const v = e.target.value;
+          console.log(v, "v");
+          timer = setTimeout(() => {
+            console.log("illl fired");
+            setquery(v);
+          }, 1500);
         }}
       />
       <div

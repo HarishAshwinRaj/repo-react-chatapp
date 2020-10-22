@@ -23,8 +23,8 @@ const ShowContact = ({ width, height, uid, username }) => {
     {
       collection: "users",
       where: [
-        ["username", "!=", username],
         ["username", ">=", addquery],
+
         [
           "username",
           "<",
@@ -37,6 +37,7 @@ const ShowContact = ({ width, height, uid, username }) => {
               )
         ]
       ],
+
       limit: 10,
       storeAs: "newsugg"
     }
@@ -50,12 +51,12 @@ const ShowContact = ({ width, height, uid, username }) => {
   ]);
 
   useEffect(() => {
-    console.log(fil, "fill");
+    console.log(newfr, cont, "fill");
     if (add === true) {
       setContact([]);
     } else {
     }
-  }, [fil]);
+  }, [addquery, newfr]);
 
   return (
     <div

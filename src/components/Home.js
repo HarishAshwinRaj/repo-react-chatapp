@@ -31,7 +31,7 @@ const Home = () => {
                         width={width / 3}
                         height={height}
                         uid={auth.uid}
-                        username={profile.username}
+                        username={isLoaded(profile) ? profile.username : ""}
                       />
                     </div>
                     <div style={{ width: (2 * width) / 3 }}>
@@ -50,7 +50,7 @@ const Home = () => {
                       width={width}
                       height={height}
                       uid={auth.uid}
-                      username={profile.username}
+                      username={isLoaded(profile) ? profile.username : ""}
                     />
                   </Route>
                   <Route path="/:type/:chatid">
