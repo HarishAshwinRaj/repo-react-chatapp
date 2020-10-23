@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Header from "../Header";
-
+import { useHistory, useParams } from "react-router-dom";
 const AuthComponent = ({ width }) => {
-  const [In, setIn] = useState(false);
+  const history = useHistory();
+  const { logtype } = useParams("auth/:logtype");
+
   return (
     <div style={{ height: "100%", width: width }}>
       <Header />
@@ -49,7 +51,7 @@ const AuthComponent = ({ width }) => {
             }}
             onClick={(e) => {
               e.target.style.backgroundColor = "white";
-              setIn(false);
+              history.push("/auth/create");
             }}
           >
             SignUp
@@ -74,13 +76,13 @@ const AuthComponent = ({ width }) => {
             }}
             onClick={(e) => {
               e.target.style.backgroundColor = "white";
-              setIn(true);
+              history.push("/auth/login");
             }}
           >
             SignIn
           </div>
         </div>
-        {In ? <SignIn /> : <SignUp />}
+        {logtype === "login" ? <SignIn /> : <SignUp />}
       </div>
     </div>
   );

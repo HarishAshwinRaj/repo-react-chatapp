@@ -1,79 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ShowContact from "./ShowContact";
 import ChatComponent from "./ChatComponent";
 import useWindowDim from "../custHoos/usewindow";
-import AuthComponent from "./AuthScreen/AuthComponent";
+
 import { useSelector } from "react-redux";
-import { isEmpty, isLoaded, useFirebase } from "react-redux-firebase";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { isEmpty, isLoaded } from "react-redux-firebase";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory
+} from "react-router-dom";
 
 const Home = () => {
+  let history = useHistory();
   const auth = useSelector((d) => d.firebase.auth);
-  const profile = useSelector((d) => d.firebase.profile);
+
   const { width, height } = useWindowDim();
-  //const firebase = useFirebase();
-  // firebase.logout();
+
   if (!!isLoaded(auth)) {
-    if (!isEmpty(auth)) {
-      console.log(profile);
-      return (
-        <div style={{}}>
-          <Router>
-            <Switch>
-              <Route exact path="/auth">
-                <AuthComponent width={width} />
-              </Route>
-              {width > 700 ? (
-                <Route path={["/:type/:chatid", "/"]}>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div style={{ width: width / 3 }}>
-                      <ShowContact
-                        width={width / 3}
-                        height={height}
-                        uid={auth.uid}
-                        username={isLoaded(profile) ? profile.username : ""}
-                      />
-                    </div>
-                    <div style={{ width: (2 * width) / 3 }}>
-                      <ChatComponent
-                        width={(2 * width) / 3}
-                        height={height}
-                        uid={auth.uid}
-                      />
-                    </div>
-                  </div>
-                </Route>
-              ) : (
-                <div style={{ width: width }}>
-                  <Route exact path="/">
-                    <ShowContact
-                      width={width}
-                      height={height}
-                      uid={auth.uid}
-                      username={isLoaded(profile) ? profile.username : ""}
-                    />
-                  </Route>
-                  <Route path="/:type/:chatid">
-                    <ChatComponent
-                      width={width}
-                      height={height}
-                      uid={auth.uid}
-                    />
-                  </Route>
-                </div>
-              )}
-            </Switch>
-          </Router>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          {" "}
-          <AuthComponent width={width} />
-        </div>
-      );
+    if (!!isEmpty(auth) && history) {
+      history.push("/auth/create");
     }
+    return (
+      <Router>
+        <Switch>
+          {width > 700 ? (
+            <Route path={["/home/:type/:chatid", "/home",'/']}>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: width / 3 }}>
+                  <ShowContact
+                    width={width / 3}
+                    height={height}
+                    uid={auth.uid}
+                  />
+                </div>
+                <div style={{ width: (2 * width) / 3 }}>
+                  <ChatComponent
+                    width={(2 * width) / 3}
+                    height={height}
+                    uid={auth.uid}
+                  />
+                </div>
+              </div>
+            </Route>
+          ) : (
+            <div style={{ width: width }}>
+              <Route exact path={["/home",'/']}>
+                <ShowContact width={width} height={height} uid={auth.uid} />
+              </Route>
+              <Route path="home/:type/:chatid">
+                <ChatComponent width={width} height={height} uid={auth.uid} />
+              </Route>
+            </div>
+          )}
+        </Switch>
+      </Router>
+    );
   } else {
     console.log("loading for it ");
     return <div>loading .... </div>;

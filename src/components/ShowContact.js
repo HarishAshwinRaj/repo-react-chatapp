@@ -5,13 +5,14 @@ import AddContact from "./contacts/addContacts";
 import SearchBar from "./contacts/searchBar";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
-const ShowContact = ({ width, height, uid, username }) => {
+import EmptyContact from "./contacts/emptyContact";
+const ShowContact = ({ width, height, uid }) => {
   useFirestoreConnect([
     {
       collection: "users",
-      doc: uid,
-      subcollections: [{ collection: "chatlist" }],
-      orderBy: ["lastmessageTime", "desc"],
+      doc: uid ?? "null",
+      subcollections: [{ collection: "chatslist" }],
+      orderBy: ["lastmessagetime", "desc"],
       limit: 3,
       storeAs: "contacts"
     }
@@ -42,21 +43,65 @@ const ShowContact = ({ width, height, uid, username }) => {
       storeAs: "newsugg"
     }
   ]);
+  useFirestoreConnect([
+    {
+      collection: "users",
+      doc: uid ?? "null",
+      subcollections: [{ collection: "chatslist" }],
+
+      where: [
+        ["username", ">=", query],
+
+        [
+          "username",
+          "<",
+          query &&
+            query.slice(0, query.length - 1) +
+              String.fromCharCode(
+                addquery.slice(query.length - 1, query.length).charCodeAt(0) + 1
+              )
+        ]
+      ],
+
+      limit: 10,
+      storeAs: "sContact"
+    }
+  ]);
 
   const [contact, setContact] = useState([]);
   const [add, setadd] = useState(false);
-  const [cont, newfr] = useSelector((d) => [
+  const [cont, scont, newfr, f] = useSelector((d) => [
     d.firestore.ordered.contacts,
-    d.firestore.ordered.newsugg
+    d.firestore.ordered.sContact,
+    d.firestore.ordered.newsugg,
+    d.firestore.ordered
   ]);
 
   useEffect(() => {
-    console.log(newfr, cont, "fill");
-    if (add === true) {
-      setContact([]);
-    } else {
+    function contactchec() {
+      console.log(newfr, cont, scont, query, addquery, f, "fill");
+      if (!!query || !!addquery) {
+        console.log(newfr, cont, "through");
+        if (add === true) {
+          if (!!newfr) {
+            const b = newfr.filter((t) => t.id != uid);
+            setContact(b);
+          } else {
+            setContact([]);
+          }
+        } else {
+          setContact(scont);
+        }
+      } else {
+        setContact(cont);
+      }
     }
-  }, [addquery, newfr]);
+    contactchec();
+
+    () => {
+      null;
+    };
+  }, [addquery, newfr, cont, query, scont, add]);
 
   return (
     <div
@@ -77,9 +122,17 @@ const ShowContact = ({ width, height, uid, username }) => {
         />
       </div>
       <div style={{ height: height - 100, overflowY: "scroll" }}>
-        {contact.map(({ name, img }) => (
-          <Contact name={name} img={img} />
-        ))}
+        {!!contact &&
+          contact.map(({ username, photourl, id }) => (
+            <Contact
+              name={username}
+              img={photourl}
+              add={add}
+              setadd={setadd}
+              id={id}
+            />
+          ))}
+        {!contact && <EmptyContact />}
       </div>
       <div
         style={{

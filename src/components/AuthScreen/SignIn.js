@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFirebase } from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 const SingleInput = ({ name, ...props }) => {
   return (
     <div>
@@ -35,6 +36,7 @@ const SignIn = () => {
   const [email, setemail] = useState();
   const [pwd, setpwd] = useState();
   const firebase = useFirebase();
+  const history = useHistory();
   const autherr = useSelector((d) => d.firebase.authError);
   const handlesubmit = (e) => {
     //e.preventDefault();
@@ -44,6 +46,7 @@ const SignIn = () => {
         password: pwd
       })
       .then((d) => {
+        history.push("/home");
         console.log(d, "data");
       })
       .catch((e) => {

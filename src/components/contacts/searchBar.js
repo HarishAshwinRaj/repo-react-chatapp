@@ -23,7 +23,7 @@ const SearchBar = ({ text, setquery }) => {
           timer = setTimeout(() => {
             console.log("illl fired");
             setquery(v);
-          }, 1500);
+          }, 1000);
         }}
       />
       <div

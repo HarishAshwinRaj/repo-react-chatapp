@@ -4,7 +4,7 @@ import ChatContent from "./chatcompo/chatContent";
 import ChatHeader from "./chatcompo/chatHeader";
 import ChatInput from "./chatcompo/chatInput";
 const ChatComponent = ({ width, height }) => {
-  const { chatid, type } = useParams();
+  const { chatid, type } = useParams("/home/:type/:chatid");
   return (
     <div style={{}}>
       <ChatHeader type={type} width={width} />

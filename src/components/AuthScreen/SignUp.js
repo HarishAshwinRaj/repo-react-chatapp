@@ -1,6 +1,12 @@
-import React, { useState } from "react";
-import { useFirebase, useFirestore } from "react-redux-firebase";
+import React, { useEffect, useState } from "react";
+import {
+  useFirebase,
+  useFirestore,
+  isLoaded,
+  isEmpty
+} from "react-redux-firebase";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 const SingleInput = ({ name, ...props }) => {
   return (
     <div>
@@ -35,15 +41,60 @@ const SignUp = () => {
   const [email, setemail] = useState();
   const [pwd, setpwd] = useState();
   const [name, setname] = useState();
+  const [cr, setcr] = useState(false);
   const [img, setimg] = useState(null);
+  const [imgul, setimgul] = useState(null);
+  let url = null;
+  let i = 0;
   const firebase = useFirebase();
   const firestore = useFirestore();
+  let history = useHistory();
   const [autherr, auth] = useSelector((d) => [
     d.firebase.authError,
     d.firebase.auth
   ]);
+  useEffect(() => {
+    if (!!isLoaded(auth) && !isEmpty(auth)) {
+      console.log(auth.uid, "outter");
+      if (!cr) {
+        history.push("/home");
+      } else {
+        if (i <= 0) {
+          console.log("inside");
+          firebase
+            .uploadFile(`users/avatar/${auth.uid}`, img, "avatar/" + auth.uid, {
+              documentId: auth.uid,
+              metadataFactory: function (a, b, c, d) {
+                console.log(d, "url");
+                url = d;
+                return { photourl: d };
+              },
+              useSetForMetadata: true
+            })
+            .then((e) => {
+              i++;
+              console.log("uploaded", url);
+              firestore
+                .collection("users")
+                .doc(auth.uid)
+                .update({ photourl: url })
+                .then(() => {
+                  history.push("/home");
+                  console.log("home sweert home");
+                });
+            })
+            .catch((e) => console.log("err uploading", e));
+        }
+      }
+    }
+  }, [auth]);
+
   const handlesubmit = (e) => {
+    setcr(true);
     //e.preventDefault();
+    /*
+     */
+
     firebase
       .createUser(
         {
@@ -53,11 +104,12 @@ const SignUp = () => {
         {
           email: email,
           username: name,
-          photourl: null
+          chatlist: []
         }
       )
       .then((d) => {
-        console.log(auth && auth.uid, "data");
+        console.log("success");
+        !!isLoaded(auth) && !isEmpty(auth) && console.log(auth.uid);
       })
       .catch((e) => {
         console.log(e, "err");
@@ -98,10 +150,11 @@ const SignUp = () => {
         name="image"
         type="file"
         onChange={(t) => {
-          setimg(URL.createObjectURL(t.target.files[0]));
+          setimg(t.target.files[0]);
+          setimgul(URL.createObjectURL(t.target.files[0]));
         }}
       />
-      <img alt={"imag"} src={img} height={50} style={{ paddingLeft: 20 }} />
+      <img alt={"imag"} src={imgul} height={50} style={{ paddingLeft: 20 }} />
       <div style={{ margin: "auto", marginTop: 50, width: 100 }}>
         <input
           type="button"
