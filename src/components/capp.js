@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Home from "./Home";
-import useWindowDim from "../custHoos/usewindow";
+
 import AuthComponent from "./AuthScreen/AuthComponent";
 import { useSelector } from "react-redux";
 import { isEmpty, isLoaded, useFirebase } from "react-redux-firebase";
@@ -12,20 +12,17 @@ import {
 } from "react-router-dom";
 
 const CApp = () => {
-  let history = useHistory();
-  const auth = useSelector((d) => d.firebase.auth);
-  const profile = useSelector((d) => d.firebase.profile);
-  const { width, height } = useWindowDim();
-
   return (
     <Router>
       <Switch>
-        <Route exact path="/auth/:logtype">
-          <AuthComponent width={width} />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route exact path="/auth/:logtype" component={AuthComponent} />
+
+        <Route
+          path="/"
+          render={({ ...props }) => {
+            return <Home {...props} />;
+          }}
+        />
       </Switch>
     </Router>
   );
