@@ -1,8 +1,9 @@
 import React from "react";
 import useWindowDim from "../../custHoos/usewindow";
-import MaterialIcon, { colorPalette } from "material-icons-react";
-
-const ChatHeader = ({ width }) => {
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import MoreVert from "@material-ui/icons/MoreVert";
+const ChatHeader = ({ width, history, chat, uid }) => {
+  console.log(chat, "lopop");
   return (
     <div
       style={{
@@ -17,8 +18,12 @@ const ChatHeader = ({ width }) => {
         width: width - 22
       }}
     >
-      <span>
-        <MaterialIcon icon={"arrow_back"} color="blue" />
+      <span
+        onClick={() => {
+          history.push("/home");
+        }}
+      >
+        <ArrowBack />
       </span>
       <div
         style={{
@@ -27,10 +32,16 @@ const ChatHeader = ({ width }) => {
         }}
       >
         <img
-          src={"https://picsum.photos/id/1005/50/50"}
+          src={
+            chat.type == "i"
+              ? chat.chatname[uid].photourl
+              : chat.chatname.photourl
+          }
           alt={"img"}
           style={{
-            borderRadius: 200
+            borderRadius: 200,
+            height: 50,
+            width: 50
           }}
         />
       </div>
@@ -39,7 +50,9 @@ const ChatHeader = ({ width }) => {
           flex: "100%"
         }}
       >
-        chats name
+        {chat.type == "i"
+          ? chat.chatname[uid].username
+          : chat.chatname.username}
       </div>
       <div
         style={{
@@ -48,7 +61,7 @@ const ChatHeader = ({ width }) => {
           marginRight: 30
         }}
       >
-        <MaterialIcon icon={"more_vert"} color="blue" />
+        <MoreVert color="blue" />
       </div>
     </div>
   );

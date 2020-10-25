@@ -104,7 +104,8 @@ const SignUp = () => {
         {
           email: email,
           username: name,
-          chatlist: []
+          chatlist: [],
+          contacts:[]
         }
       )
       .then((d) => {

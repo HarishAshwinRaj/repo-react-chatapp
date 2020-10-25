@@ -1,14 +1,15 @@
 import React from "react";
 import moment from "moment";
 const f = Date.now();
-const ChatIndividual = () => {
+const ChatIndividual = ({ t = false }) => {
+  const flexdir = t ? "flex-end" : "flex-start";
   return (
     <div
       style={{
         color: "white",
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-end",
+        alignItems: flexdir,
         marginBottom: 10
       }}
     >
@@ -33,11 +34,13 @@ const ChatIndividual = () => {
           <div
             style={{
               borderRadius: 3,
-              padding: 3,
+              padding: 5,
+              marginTop: 5,
               fontSize: 10,
+              width: 45,
               backgroundColor: "white",
               color: "blue",
-              alignSelf: "flex-end"
+              alignSelf: flexdir
             }}
           >
             {moment(f).format("LT")}

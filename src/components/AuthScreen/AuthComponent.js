@@ -2,11 +2,10 @@ import React from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Header from "../Header";
+import useWindowDim from "../../custHoos/usewindow";
 import { useHistory, useParams } from "react-router-dom";
-const AuthComponent = ({ width }) => {
-  const history = useHistory();
-  const { logtype } = useParams("auth/:logtype");
-
+const AuthComponent = ({ history, match }) => {
+  const { width, height } = useWindowDim();
   return (
     <div style={{ height: "100%", width: width }}>
       <Header />
@@ -82,7 +81,7 @@ const AuthComponent = ({ width }) => {
             SignIn
           </div>
         </div>
-        {logtype === "login" ? <SignIn /> : <SignUp />}
+        {match.params.logtype === "login" ? <SignIn /> : <SignUp />}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useFirebase } from "react-redux-firebase";
+import React, { useEffect, useState } from "react";
+import { isLoaded, useFirebase, isEmpty } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 const SingleInput = ({ name, ...props }) => {
@@ -37,7 +37,10 @@ const SignIn = () => {
   const [pwd, setpwd] = useState();
   const firebase = useFirebase();
   const history = useHistory();
-  const autherr = useSelector((d) => d.firebase.authError);
+  const [autherr, auth] = useSelector((d) => [
+    d.firebase.authError,
+    d.firebase.auth
+  ]);
   const handlesubmit = (e) => {
     //e.preventDefault();
     firebase
@@ -46,13 +49,17 @@ const SignIn = () => {
         password: pwd
       })
       .then((d) => {
-        history.push("/home");
         console.log(d, "data");
       })
       .catch((e) => {
         console.log(e, "err");
       });
   };
+  useEffect(() => {
+    if (isLoaded(auth) && !isEmpty(auth)) {
+      history.push("/home");
+    }
+  }, [auth]);
   return (
     <div
       style={{

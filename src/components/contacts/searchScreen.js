@@ -3,19 +3,12 @@ import Contact from "./contacts/Contact";
 import Header from "./Header";
 import AddContact from "./contacts/addContacts";
 import SearchBar from "./contacts/searchBar";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import { useSelector } from "react-redux";
-const SeacrhScreen = ({ width, height, uid }) => {
-  useFirestoreConnect([
-    {
-      collection: "users",
-      doc: uid ?? "null",
-      subcollections: [{ collection: "chatslist" }],
-      orderBy: ["lastmessageTime", "desc"],
-      limit: 3,
-      storeAs: "contacts"
-    }
-  ]);
+import EmptyContact from "./contacts/emptyContact";
+const SearchScreen = ({ width, height, uid }) => {
+  const profile = useSelector((D) => D.firebase);
+
   const [query, setQuery] = useState("");
   const [addquery, setaddQuery] = useState("");
   //for search query
@@ -42,22 +35,60 @@ const SeacrhScreen = ({ width, height, uid }) => {
       storeAs: "newsugg"
     }
   ]);
+  useFirestoreConnect([
+    {
+      collection: "chats",
+
+      where: [
+        [
+          "chatid",
+          "in",
+          isLoaded(profile.chatlist) ? profile.chatlist : ["7klKNktu1"]
+        ],
+        ["username", ">=", query],
+
+        [
+          "username",
+          "<",
+          query &&
+            query.slice(0, query.length - 1) +
+              String.fromCharCode(
+                addquery.slice(query.length - 1, query.length).charCodeAt(0) + 1
+              )
+        ]
+      ],
+
+      limit: 10,
+      storeAs: "sContact"
+    }
+  ]);
 
   const [contact, setContact] = useState([]);
   const [add, setadd] = useState(false);
-  const [cont, newfr] = useSelector((d) => [
-    d.firestore.ordered.contacts,
-    d.firestore.ordered.newsugg
+  const [scont, newfr, f] = useSelector((d) => [
+    d.firestore.ordered.sContact,
+    d.firestore.ordered.newsugg,
+    d.firestore.ordered
   ]);
 
   useEffect(() => {
-    console.log(newfr, cont, "fill");
-    if (add === true) {
-      const b = newfr.filter((t) => t.id != uid);
-      setContact(b);
-    } else {
+    function contactchec() {
+      console.log(newfr, scont, query, addquery, f, "fill");
+      if (!!query || !!addquery) {
+        console.log(newfr, "through");
+
+        if (!!newfr) {
+          const b = newfr.filter((t) => t.id != uid);
+          setContact(b);
+        } else {
+          setContact([]);
+        }
+      } else {
+        setContact(scont);
+      }
     }
-  }, [addquery, newfr]);
+    contactchec();
+  }, [addquery, newfr, query, scont]);
 
   return (
     <div
@@ -77,18 +108,24 @@ const SeacrhScreen = ({ width, height, uid }) => {
           setquery={setaddQuery}
         />
       </div>
+      <div style={{ height: height - 100, overflowY: "scroll" }}>
+        {!!contact &&
+          contact.map(({ username, photourl, id }) => (
+            <Contact name={username} img={photourl} id={id} />
+          ))}
+        {!contact && <EmptyContact />}
+      </div>
       <div
         style={{
-          height: height - 300,
-          backgroundColor: "grey",
-          overflowY: "scroll"
+          width: width,
+          position: "fixed",
+          bottom: 20,
+          left: width - 50
         }}
       >
-        {contact.map(({ username, img }) => (
-          <Contact name={username} img={img} add={add} />
-        ))}
+        <AddContact set={setadd} />
       </div>
     </div>
   );
 };
-export default SeacrhScreen;
+export default SearchScreen;

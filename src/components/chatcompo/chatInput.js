@@ -1,5 +1,5 @@
 import React from "react";
-import MaterialIcon, { colorPalette } from "material-icons-react";
+import Send from '@material-ui/icons/Send';
 
 const ChatInput = ({ width }) => {
   return (
@@ -50,7 +50,7 @@ const ChatInput = ({ width }) => {
             padding: 5
           }}
         >
-          <MaterialIcon icon="send" color="green" />
+          <Send color="green" />
         </div>
       </div>
     </div>

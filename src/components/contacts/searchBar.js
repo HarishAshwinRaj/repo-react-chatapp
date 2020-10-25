@@ -1,10 +1,13 @@
 import React from "react";
-import MaterialIcon from "material-icons-react";
+import Search from "@material-ui/icons/Search";
+import ArrowBack from "@material-ui/icons/ArrowBack";
 
+import { useHistory } from "react-router-dom";
 let timer = setTimeout(() => {
   return null;
 }, 1000);
 const SearchBar = ({ text, setquery }) => {
+  const history = useHistory();
   return (
     <div
       style={{
@@ -13,6 +16,19 @@ const SearchBar = ({ text, setquery }) => {
         justifyContent: "center"
       }}
     >
+      <div
+        style={{
+          marginLeft: 10,
+          marginRight: 10,
+          padding: 5,
+          borderRadius: 20
+        }}
+        onClick={() => {
+          history.push("/home");
+        }}
+      >
+        <ArrowBack />
+      </div>
       <input
         placeholder={text}
         style={{ width: "90%", paddingLeft: 20, height: 30 }}
@@ -35,7 +51,7 @@ const SearchBar = ({ text, setquery }) => {
         }}
       >
         {" "}
-        <MaterialIcon icon="search" color="aqua" />
+        <Search />
       </div>
     </div>
   );

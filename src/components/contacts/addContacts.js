@@ -1,6 +1,8 @@
 import React from "react";
-import MaterialIcon from "material-icons-react";
+import Add from "@material-ui/icons/Add";
+import { useHistory } from "react-router-dom";
 const AddContact = ({ set }) => {
+  const history = useHistory();
   return (
     <div
       style={{
@@ -11,10 +13,10 @@ const AddContact = ({ set }) => {
         textAlign: "center"
       }}
       onClick={() => {
-        set((d) => !d);
+        history.push("/users/Search");
       }}
     >
-      <MaterialIcon icon="add" color="black" />
+      <Add color="black" />
     </div>
   );
 };
