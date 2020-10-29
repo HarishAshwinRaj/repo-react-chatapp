@@ -2,8 +2,31 @@ import React from "react";
 import useWindowDim from "../../custHoos/usewindow";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import MoreVert from "@material-ui/icons/MoreVert";
+import { useFirestore } from "react-redux-firebase";
+
 const ChatHeader = ({ width, history, chat, uid }) => {
-  console.log(chat, "lopop");
+  const firestore = useFirestore();
+
+/*  function constb() {
+    const rem = chat.lastreadmsg;
+    console.log(chat, " 'reme ", rem);
+    rem[uid] = chat.lastmessagetime;
+  console.log(rem, "rem");
+    firestore
+      .collection("chats")
+      .doc(chat.chatid)
+      .update({
+        lastreadmsg: rem
+      })
+      .then(() => {
+        history.push("/home");
+      });
+  }*/
+  function constb() {
+  
+        history.push("/home");
+    
+  }
   return (
     <div
       style={{
@@ -20,7 +43,7 @@ const ChatHeader = ({ width, history, chat, uid }) => {
     >
       <span
         onClick={() => {
-          history.push("/home");
+          constb();
         }}
       >
         <ArrowBack />

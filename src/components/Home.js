@@ -35,11 +35,29 @@ const Home = ({ match, history }) => {
               return (
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <div style={{ width: width / 3 }}>
-                    <ContactComponent
-                      width={width / 3}
-                      height={height}
-                      uid={auth.uid}
-                    />
+                    <Switch>
+                      <Route path="/users/Search">
+                        <SearchUsers
+                          width={width / 3}
+                          height={height}
+                          uid={auth.uid}
+                        />
+                      </Route>
+                      <Route path="/contacts/Search">
+                        <SearchContacts
+                          width={width / 3}
+                          height={height}
+                          uid={auth.uid}
+                        />
+                      </Route>
+                      <Route path={["/home", "/", "/home/:type/:chatid"]}>
+                        <ContactComponent
+                          width={width / 3}
+                          height={height}
+                          uid={auth.uid}
+                        />
+                      </Route>
+                    </Switch>
                   </div>
                   <div style={{ width: (2 * width) / 3 }}>
                     <ChatComponent

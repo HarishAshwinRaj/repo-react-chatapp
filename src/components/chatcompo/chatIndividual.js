@@ -1,10 +1,24 @@
 import React from "react";
 import moment from "moment";
-const f = Date.now();
-const ChatIndividual = ({ t = false }) => {
-  const flexdir = t ? "flex-end" : "flex-start";
+import ChatAuto from "./chatAuto";
+
+const ChatIndividual = ({
+  t = false,
+  messageBody,
+  messagetime,
+  sentBy,
+  id,
+  uid
+}) => {
+  if (sentBy === "auto") {
+    return <ChatAuto messageBody={messageBody} id={id} />;
+  }
+
+  const flexdir = sentBy === uid ? "flex-end" : "flex-start";
   return (
     <div
+      id={id}
+      key={id}
       style={{
         color: "white",
         display: "flex",
@@ -29,8 +43,7 @@ const ChatIndividual = ({ t = false }) => {
             fontSize: 15
           }}
         >
-          chat as a individual goes here chat as a individual goes here chat as
-          a
+          {messageBody}
           <div
             style={{
               borderRadius: 3,
@@ -43,7 +56,7 @@ const ChatIndividual = ({ t = false }) => {
               alignSelf: flexdir
             }}
           >
-            {moment(f).format("LT")}
+            {messagetime && moment(messagetime.toDate()).format("LT")}
           </div>
         </div>
       </div>

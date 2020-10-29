@@ -40,7 +40,7 @@ const ShowContact = ({ width, height, uid }) => {
         [
           "chatid",
           "in",
-          isLoaded(profile.chatList) ? profile.chatList : ["kill"]
+          isLoaded(profile.chatList)&&profile.chatList.length!== 0 ? profile.chatList : ["kill"]
         ]
       ],
       storeAs: "contacts"

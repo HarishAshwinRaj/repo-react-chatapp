@@ -55,7 +55,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rrfprop}>
-        <CApp />
+        <CApp/>
       </ReactReduxFirebaseProvider>
     </Provider>
   );

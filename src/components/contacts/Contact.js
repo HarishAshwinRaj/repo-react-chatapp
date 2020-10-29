@@ -19,9 +19,6 @@ const Contact = ({ name, type, id, img, add, setadd, comp }) => {
         height: "50px",
         marginBottom: 5
       }}
-      onClick={() => {
-        history.push("/home/" + type + "/" + id);
-      }}
     >
       <div
         style={{
@@ -40,7 +37,14 @@ const Contact = ({ name, type, id, img, add, setadd, comp }) => {
           }}
         />
       </div>
-      <div style={{}}>{name}</div>
+      <div
+        style={{ width: "80%" }}
+        onClick={() => {
+          history.push("/home/" + type + "/" + id);
+        }}
+      >
+        {name}
+      </div>
 
       <div style={{ position: "absolute", right: 30 }}>
         {comp && comp({ name, id, img })}

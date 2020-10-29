@@ -18,6 +18,9 @@ const RequestButton = ({ name, img, id, chat }) => {
   const createchats = () => {
     const f = uuid();
     let chatname = {};
+    let lrm ={}
+    lrm[auth.uid] = firestore.FieldValue.serverTimestamp()
+    lrm[id] = firestore.FieldValue.serverTimestamp()
     chatname[auth.uid] = { username: name, photourl: img };
     chatname[id] = { username: profile.username, photourl: profile.photourl };
     console.log(chatname, "chatname");
@@ -29,6 +32,7 @@ const RequestButton = ({ name, img, id, chat }) => {
         type: "i",
         chatid: f,
         members: [auth.uid, id],
+        lastreadmsg:lrm,
         lastmessagetime: firestore.FieldValue.serverTimestamp()
       })
       .then((d) => {
